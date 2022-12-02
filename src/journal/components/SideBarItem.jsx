@@ -34,6 +34,8 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
     return newDate.toUTCString().split(" ").slice(0, 4).join(" ");
   }, [date]);
 
+  // TODO: STYLES IN MY NOTES
+
   return (
     <ListItem
       sx={{
