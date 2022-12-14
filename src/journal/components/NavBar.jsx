@@ -8,6 +8,7 @@ import {
   toggleShowComponentModal,
 } from "../../store/navbar/navbarSlice";
 import { ModalLogout } from "./ModalLogout";
+import { startLogout } from "../../store/auth";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ export const NavBar = () => {
 
   const onShowModalLogout = () => {
     dispatch(toggleShowComponentModal());
+  };
+
+  const onLogout = () => {
+    dispatch(startLogout());
   };
 
   return (
@@ -45,8 +50,10 @@ export const NavBar = () => {
             <IconButton color="error" onClick={onShowModalLogout}>
               <LogoutOutlined />
             </IconButton>
-
-            <ModalLogout />
+            <ModalLogout
+              onLogout={onLogout}
+              title="Are you sure you want to logout?"
+            />
           </Grid>
         </Toolbar>
       </AppBar>

@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
 import { useForm } from "../../hooks/useForm";
-import { ImageGallery } from "../components";
+import { ImageGallery, ModalLogout } from "../components";
 import {
   setActiveNote,
   startDeletingNote,
@@ -19,6 +19,10 @@ import {
   startUploadingFiles,
 } from "../../store/journal";
 import { useRef } from "react";
+import {
+  clearShow,
+  toggleShowComponentModal,
+} from "../../store/navbar/navbarSlice";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -57,6 +61,11 @@ export const NoteView = () => {
 
   const onDelete = () => {
     dispatch(startDeletingNote());
+    dispatch(toggleShowComponentModal());
+  };
+
+  const onShowModalLogout = () => {
+    dispatch(toggleShowComponentModal());
   };
 
   return (
@@ -97,7 +106,7 @@ export const NoteView = () => {
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Save
         </Button>
-        <Button disabled={isSaving} onClick={onDelete} color="error">
+        <Button disabled={isSaving} onClick={onShowModalLogout} color="error">
           <DeleteOutline />
           Delete
         </Button>
@@ -131,6 +140,11 @@ export const NoteView = () => {
       </Grid>
 
       <ImageGallery images={activeNote.imageUrls} />
+
+      <ModalLogout
+        onDelete={onDelete}
+        title="Are you sure you want to remove the note?"
+      />
     </Grid>
   );
 };

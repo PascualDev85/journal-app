@@ -29,14 +29,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
-      <Drawer
-        // variant=""
-        open={showComponentSlider}
-        // sx={{
-        //   display: { xs: "none", sm: "block" },
-        //   "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
-        // }}
-      >
+      <Drawer open={showComponentSlider}>
         <Grid
           container
           direction="row"

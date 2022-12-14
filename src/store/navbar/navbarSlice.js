@@ -13,9 +13,16 @@ export const navbarSlice = createSlice({
     toggleShowComponentModal: (state) => {
       state.showComponentModalLogout = !state.showComponentModalLogout;
     },
+    clearShow: (state) => {
+      state.showComponentSlider = false;
+      state.showComponentModalLogout = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { toggleShowComponentSlider, toggleShowComponentModal } =
-  navbarSlice.actions;
+export const {
+  toggleShowComponentSlider,
+  toggleShowComponentModal,
+  clearShow,
+} = navbarSlice.actions;

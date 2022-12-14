@@ -1,7 +1,7 @@
 import { Toolbar } from "@mui/material";
 import { Box } from "@mui/system";
 
-import { NavBar, SideBar, ModalLogout } from "../components/";
+import { NavBar, SideBar } from "../components/";
 
 const drawerWidth = 0;
 

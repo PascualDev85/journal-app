@@ -62,7 +62,7 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
           >
             {dateString}
           </Typography>
-          <ListItemText primary={newTitle} />
+          <ListItemText sx={{ fontWeight: 7 }} primary={newTitle} />
           <Divider />
           <ListItemText secondary={newBody} />
         </Grid>

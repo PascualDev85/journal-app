@@ -18,16 +18,13 @@ const style = {
   p: 4,
 };
 
-export const ModalLogout = () => {
+export const ModalLogout = ({ title, onDelete, onLogout }) => {
   const dispatch = useDispatch();
+  console.log(onDelete);
 
   const { showComponentModalLogout } = useSelector((state) => state.navbar);
 
-  const onLogout = () => {
-    dispatch(startLogout());
-  };
-
-  const onShowModalLogout = () => {
+  const onCloseLogout = () => {
     dispatch(toggleShowComponentModal());
   };
 
@@ -39,21 +36,23 @@ export const ModalLogout = () => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Are you sure you want to logout?
+          {title}
         </Typography>
         <Divider />
 
         <Grid container sx={{ mt: 3 }} direction="row" justifyContent="end">
-          <Button
-            variant="contained"
-            sx={{ mr: 2 }}
-            onClick={onShowModalLogout}
-          >
+          <Button variant="contained" sx={{ mr: 2 }} onClick={onCloseLogout}>
             No
           </Button>
-          <Button variant="contained" color="error" onClick={onLogout}>
-            Yes
-          </Button>
+          {onDelete ? (
+            <Button variant="contained" color="error" onClick={onDelete}>
+              Yes
+            </Button>
+          ) : (
+            <Button variant="contained" color="error" onClick={onLogout}>
+              Yes
+            </Button>
+          )}
         </Grid>
       </Box>
     </Modal>
