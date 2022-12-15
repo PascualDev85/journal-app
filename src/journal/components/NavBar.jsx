@@ -5,7 +5,7 @@ import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 
 import {
   toggleShowComponentSlider,
-  toggleShowComponentModal,
+  toggleShowComponentModalLogout,
 } from "../../store/navbar/navbarSlice";
 import { ModalLogout } from "./ModalLogout";
 import { startLogout } from "../../store/auth";
@@ -17,8 +17,8 @@ export const NavBar = () => {
     dispatch(toggleShowComponentSlider());
   };
 
-  const onShowModalLogout = () => {
-    dispatch(toggleShowComponentModal());
+  const onShowModalLogout = (e) => {
+    dispatch(toggleShowComponentModalLogout());
   };
 
   const onLogout = () => {
@@ -50,10 +50,7 @@ export const NavBar = () => {
             <IconButton color="error" onClick={onShowModalLogout}>
               <LogoutOutlined />
             </IconButton>
-            <ModalLogout
-              onLogout={onLogout}
-              title="Are you sure you want to logout?"
-            />
+            <ModalLogout onLogout={onLogout} />
           </Grid>
         </Toolbar>
       </AppBar>

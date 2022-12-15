@@ -5,17 +5,22 @@ export const navbarSlice = createSlice({
   initialState: {
     showComponentSlider: false,
     showComponentModalLogout: false,
+    showComponentModalDeleteNote: false,
   },
   reducers: {
     toggleShowComponentSlider: (state) => {
       state.showComponentSlider = !state.showComponentSlider;
     },
-    toggleShowComponentModal: (state) => {
+    toggleShowComponentModalLogout: (state) => {
       state.showComponentModalLogout = !state.showComponentModalLogout;
+    },
+    toggleShowComponentModalDeleteNote: (state) => {
+      state.showComponentModalDeleteNote = !state.showComponentModalDeleteNote;
     },
     clearShow: (state) => {
       state.showComponentSlider = false;
       state.showComponentModalLogout = false;
+      state.showComponentModalDeleteNote = false;
     },
   },
 });
@@ -23,6 +28,7 @@ export const navbarSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   toggleShowComponentSlider,
-  toggleShowComponentModal,
+  toggleShowComponentModalLogout,
+  toggleShowComponentModalDeleteNote,
   clearShow,
 } = navbarSlice.actions;

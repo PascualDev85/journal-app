@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Box, Typography, Modal, Divider, Grid, Button } from "@mui/material/";
 
-import { toggleShowComponentModalLogout } from "../../store/navbar/navbarSlice";
+import { toggleShowComponentModalDeleteNote } from "../../store/navbar/navbarSlice";
 
 const style = {
   position: "absolute",
@@ -17,24 +17,24 @@ const style = {
   p: 4,
 };
 
-export const ModalLogout = ({ onLogout }) => {
+export const ModalDeleteNote = ({ onDelete }) => {
   const dispatch = useDispatch();
 
-  const { showComponentModalLogout } = useSelector((state) => state.navbar);
+  const { showComponentModalDeleteNote } = useSelector((state) => state.navbar);
 
   const onCloseLogout = () => {
-    dispatch(toggleShowComponentModalLogout());
+    dispatch(toggleShowComponentModalDeleteNote());
   };
 
   return (
     <Modal
-      open={showComponentModalLogout}
+      open={showComponentModalDeleteNote}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Are you sure you want to logout?
+          Are you sure you want to remove the note?
         </Typography>
         <Divider />
 
@@ -42,7 +42,8 @@ export const ModalLogout = ({ onLogout }) => {
           <Button variant="contained" sx={{ mr: 2 }} onClick={onCloseLogout}>
             No
           </Button>
-          <Button variant="contained" color="error" onClick={onLogout}>
+
+          <Button variant="contained" color="error" onClick={onDelete}>
             Yes
           </Button>
         </Grid>

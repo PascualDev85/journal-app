@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Divider,
   Grid,
@@ -39,17 +39,19 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
   return (
     <ListItem
       sx={{
-        backgroundColor: "grey.200",
+        bgcolor: "grey.200",
         borderRadius: 2,
         margin: 1,
-        maxWidth: 320,
+        width: 345,
+        "&:hover": {
+          outline: "1px solid #4C2B7E",
+        },
       }}
-      button
       disablePadding
     >
       <ListItemButton onClick={onClickNote}>
         <ListItemIcon>
-          <TurnedInNot />
+          <TurnedInNot sx={{ color: "primary.main" }} />
         </ListItemIcon>
         <Grid container direction="column">
           <Typography
@@ -62,7 +64,10 @@ export const SideBarItem = ({ title = "", body, id, date, imageUrls = [] }) => {
           >
             {dateString}
           </Typography>
-          <ListItemText sx={{ fontWeight: 7 }} primary={newTitle} />
+          <ListItemText
+            sx={{ color: "black", fontWeight: "bold" }}
+            primary={newTitle}
+          />
           <Divider />
           <ListItemText secondary={newBody} />
         </Grid>

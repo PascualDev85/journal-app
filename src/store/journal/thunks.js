@@ -11,6 +11,7 @@ import {
   deleteNoteById,
 } from "./";
 import { loadNotes, fileUpload } from "../../helpers/";
+import { toggleShowComponentModalDeleteNote } from "../navbar/navbarSlice";
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -77,7 +78,6 @@ export const startUploadingFiles = (files = []) => {
     }
 
     const pohotosUrls = await Promise.all(fileUploadPromises);
-    console.log(pohotosUrls);
 
     dispatch(setPhotosToActiveNote(pohotosUrls));
   };
@@ -92,5 +92,6 @@ export const startDeletingNote = () => {
     await deleteDoc(docRef);
 
     dispatch(deleteNoteById(activeNote.id));
+    dispatch(toggleShowComponentModalDeleteNote());
   };
 };

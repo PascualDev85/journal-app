@@ -13,7 +13,7 @@ import { SideBarItem } from "./SideBarItem";
 import { CloseSharp } from "@mui/icons-material";
 import { toggleShowComponentSlider } from "../../store/navbar/navbarSlice";
 
-export const SideBar = ({ drawerWidth = 240 }) => {
+export const SideBar = () => {
   const { displayName } = useSelector((state) => state.auth);
   const { notes } = useSelector((state) => state.journal);
   const { showComponentSlider } = useSelector((state) => state.navbar);
@@ -25,10 +25,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
   };
 
   return (
-    <Box
-      component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-    >
+    <Box component="nav">
       <Drawer open={showComponentSlider}>
         <Grid
           container
@@ -57,7 +54,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
 
         <Divider />
 
-        <List sx={{ maxWidth: 340 }}>
+        <List sx={{ width: 360 }}>
           {notes.map((note) => (
             <SideBarItem key={note.id} {...note} />
           ))}

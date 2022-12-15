@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
 import { useForm } from "../../hooks/useForm";
-import { ImageGallery, ModalLogout } from "../components";
+import { ImageGallery } from "../components";
 import {
   setActiveNote,
   startDeletingNote,
@@ -19,10 +19,8 @@ import {
   startUploadingFiles,
 } from "../../store/journal";
 import { useRef } from "react";
-import {
-  clearShow,
-  toggleShowComponentModal,
-} from "../../store/navbar/navbarSlice";
+import { toggleShowComponentModalDeleteNote } from "../../store/navbar/navbarSlice";
+import { ModalDeleteNote } from "../components/ModalDeleteNote";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -61,11 +59,10 @@ export const NoteView = () => {
 
   const onDelete = () => {
     dispatch(startDeletingNote());
-    dispatch(toggleShowComponentModal());
   };
 
-  const onShowModalLogout = () => {
-    dispatch(toggleShowComponentModal());
+  const onShowModaDelete = () => {
+    dispatch(toggleShowComponentModalDeleteNote());
   };
 
   return (
@@ -106,7 +103,7 @@ export const NoteView = () => {
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Save
         </Button>
-        <Button disabled={isSaving} onClick={onShowModalLogout} color="error">
+        <Button disabled={isSaving} onClick={onShowModaDelete} color="error">
           <DeleteOutline />
           Delete
         </Button>
@@ -141,10 +138,7 @@ export const NoteView = () => {
 
       <ImageGallery images={activeNote.imageUrls} />
 
-      <ModalLogout
-        onDelete={onDelete}
-        title="Are you sure you want to remove the note?"
-      />
+      <ModalDeleteNote onDelete={onDelete} />
     </Grid>
   );
 };
