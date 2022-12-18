@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -11,19 +11,19 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.css";
 
 import { useForm } from "../../hooks/useForm";
-import { ImageGallery } from "../components";
+import { ImageGallery, ModalLogout } from "../components";
 import {
   setActiveNote,
   startDeletingNote,
   startSaveNote,
   startUploadingFiles,
 } from "../../store/journal";
-import { useRef } from "react";
 import { toggleShowComponentModalDeleteNote } from "../../store/navbar/navbarSlice";
-import { ModalDeleteNote } from "../components/ModalDeleteNote";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false);
 
   const { activeNote, messageSaved, isSaving } = useSelector(
     (state) => state.journal
@@ -62,6 +62,7 @@ export const NoteView = () => {
   };
 
   const onShowModaDelete = () => {
+    setShowModal(true);
     dispatch(toggleShowComponentModalDeleteNote());
   };
 
@@ -137,8 +138,13 @@ export const NoteView = () => {
       </Grid>
 
       <ImageGallery images={activeNote.imageUrls} />
-
-      <ModalDeleteNote onDelete={onDelete} />
+      {showModal && (
+        <ModalLogout
+          title="Are you sure you want to remove the note?"
+          onDelete={onDelete}
+          setShowModal={setShowModal}
+        />
+      )}
     </Grid>
   );
 };

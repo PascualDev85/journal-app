@@ -2,14 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Box, Typography, Modal, Divider, Grid, Button } from "@mui/material/";
 
-import { toggleShowComponentModalLogout } from "../../store/navbar/navbarSlice";
+import {
+  toggleShowComponentModalDeleteNote,
+  toggleShowComponentModalLogout,
+} from "../../store/navbar/navbarSlice";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  maxWidth: 400,
+  width: "90%",
+  margin: "auto",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -17,34 +22,49 @@ const style = {
   p: 4,
 };
 
-export const ModalLogout = ({ onLogout }) => {
+export const ModalLogout = ({ title, onLogout, onDelete, setShowModal }) => {
   const dispatch = useDispatch();
 
-  const { showComponentModalLogout } = useSelector((state) => state.navbar);
+  const { showComponentModalLogout, showComponentModalDeleteNote } =
+    useSelector((state) => state.navbar);
 
-  const onCloseLogout = () => {
-    dispatch(toggleShowComponentModalLogout());
+  const onCloseModal = () => {
+    if (showComponentModalLogout) {
+      setShowModal(false);
+      dispatch(toggleShowComponentModalLogout());
+    }
+    if (showComponentModalDeleteNote) {
+      setShowModal(false);
+      dispatch(toggleShowComponentModalDeleteNote());
+    }
   };
 
   return (
     <Modal
-      open={showComponentModalLogout}
+      open={showComponentModalLogout || showComponentModalDeleteNote}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Are you sure you want to logout?
+          {title}
         </Typography>
         <Divider />
 
         <Grid container sx={{ mt: 3 }} direction="row" justifyContent="end">
-          <Button variant="contained" sx={{ mr: 2 }} onClick={onCloseLogout}>
+          <Button variant="contained" sx={{ mr: 2 }} onClick={onCloseModal}>
             No
           </Button>
-          <Button variant="contained" color="error" onClick={onLogout}>
-            Yes
-          </Button>
+
+          {showComponentModalDeleteNote ? (
+            <Button variant="contained" color="error" onClick={onDelete}>
+              Yes
+            </Button>
+          ) : (
+            <Button variant="contained" color="error" onClick={onLogout}>
+              Yes
+            </Button>
+          )}
         </Grid>
       </Box>
     </Modal>

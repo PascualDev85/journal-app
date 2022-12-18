@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
@@ -13,11 +14,14 @@ import { startLogout } from "../../store/auth";
 export const NavBar = () => {
   const dispatch = useDispatch();
 
+  const [showModal, setShowModal] = useState(false);
+
   const onShowSideBar = () => {
     dispatch(toggleShowComponentSlider());
   };
 
   const onShowModalLogout = (e) => {
+    setShowModal(true);
     dispatch(toggleShowComponentModalLogout());
   };
 
@@ -50,7 +54,13 @@ export const NavBar = () => {
             <IconButton color="error" onClick={onShowModalLogout}>
               <LogoutOutlined />
             </IconButton>
-            <ModalLogout onLogout={onLogout} />
+            {showModal && (
+              <ModalLogout
+                title="Are you sure you want to logout?"
+                onLogout={onLogout}
+                setShowModal={setShowModal}
+              />
+            )}
           </Grid>
         </Toolbar>
       </AppBar>
